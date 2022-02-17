@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<CalcButtonData> calcButtonData = new ArrayList<CalcButtonData>() {
         {
-            add(new CalcButtonData("0", 3,0,1));
+            add(new CalcButtonData("0", 3,1,1));
             add(new CalcButtonData("1", 2,0,1));
             add(new CalcButtonData("2", 2,1,1));
             add(new CalcButtonData("3", 2,2,1));
@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
             add(new CalcButtonData("x", 1,3,1));
             add(new CalcButtonData("-", 2,3,1));
             add(new CalcButtonData("+", 3,3,1));
-            add(new CalcButtonData("=", 3,2,1));
-            add(new CalcButtonData("clear", 3,1,1));
+            add(new CalcButtonData("=", 3,2,1, CalcButtonData.ButtonType.SOLVE));
+            add(new CalcButtonData("clear", 4,1,1, CalcButtonData.ButtonType.CLEAR));
+            add(new CalcButtonData("dump", 4,2,2, CalcButtonData.ButtonType.DUMP));
 
 
         }
@@ -43,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        AppCompatTextView displayTextView = new AppCompatTextView(this);
-        displayTextView.setText("Hello world");
+        CalculatorDisplay calculatorDisplay = new CalculatorDisplay(this);
 
         GridLayout calcButtonsLayout = new GridLayout(this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             calcButtonsLayout.addView(button);
         }
 
-        layout.addView(displayTextView);
+        layout.addView(calculatorDisplay);
         layout.addView(calcButtonsLayout);
 
 
