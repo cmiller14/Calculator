@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<CalcButtonData> calcButtonData;
     Stack<String> expressions = new Stack<>();
+    PopupWindow dumpPopupWindow;
 
     private void initializeData() {
         calcButtonData = new ArrayList<CalcButtonData>() {
@@ -47,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeData();
+        FrameLayout mainLayout = new FrameLayout(this);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
+
+        dumpPopupWindow = new PopupWindow(this);
 
 
 
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if (data.type == CalcButtonData.ButtonType.DUMP) {
                                 // need to dump all the data
+                                dumpPopupWindow.display(expressions);
 
                             }
                             if (data.type == CalcButtonData.ButtonType.INPUT || data.type == CalcButtonData.ButtonType.OPERATOR){
@@ -118,7 +124,18 @@ public class MainActivity extends AppCompatActivity {
         layout.addView(calcButtonsLayout);
 
 
-        setContentView(layout);
+        mainLayout.addView(layout);
+        mainLayout.addView(dumpPopupWindow);
+        setContentView(mainLayout);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (dumpPopupWindow.isOpen()) {
+            dumpPopupWindow.close();
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }
