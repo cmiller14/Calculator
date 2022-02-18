@@ -40,7 +40,6 @@ public class CalculatorProcessor {
                     } else {
                         currentValue = currentValue / foundValue;
                     }
-//                    currentValue = currentValue / foundValue;
                 }
                 if (operation.equals("x")) {
                     currentValue = currentValue * foundValue;
