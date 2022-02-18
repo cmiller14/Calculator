@@ -35,7 +35,12 @@ public class CalculatorProcessor {
                     currentValue = currentValue - foundValue;
                 }
                 if (operation.equals("/")) {
-                    currentValue = currentValue / foundValue;
+                    if (foundValue == 0) {
+                        return Double.NaN;
+                    } else {
+                        currentValue = currentValue / foundValue;
+                    }
+//                    currentValue = currentValue / foundValue;
                 }
                 if (operation.equals("x")) {
                     currentValue = currentValue * foundValue;

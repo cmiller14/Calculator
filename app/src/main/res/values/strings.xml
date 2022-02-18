@@ -2,5 +2,6 @@
     <string name="app_name">Calculator</string>
     <string name="clearButton">Clear</string>
     <string name="dumpButton">Dump</string>
+    <string name="undoButton">Undo</string>
 
 </resources>

@@ -11,11 +11,12 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<CalcButtonData> calcButtonData;
-    private ArrayList<String> expressions;
+    Stack<String> expressions = new Stack<>();
 
     private void initializeData() {
         calcButtonData = new ArrayList<CalcButtonData>() {
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
                 add(new CalcButtonData(" x ", 1, 3, 1, CalcButtonData.ButtonType.OPERATOR));
                 add(new CalcButtonData(" - ", 2, 3, 1, CalcButtonData.ButtonType.OPERATOR));
                 add(new CalcButtonData(" + ", 3, 3, 1, CalcButtonData.ButtonType.OPERATOR));
-                add(new CalcButtonData(" = ", 4, 0, 4, CalcButtonData.ButtonType.SOLVE));
+                add(new CalcButtonData(" = ", 4, 0, 3, CalcButtonData.ButtonType.SOLVE));
                 add(new CalcButtonData(getString(R.string.clearButton), 3, 0, 1, CalcButtonData.ButtonType.CLEAR));
                 add(new CalcButtonData(getString(R.string.dumpButton), 3, 2, 1, CalcButtonData.ButtonType.DUMP));
+                add(new CalcButtonData(getString(R.string.undoButton), 4, 3, 1, CalcButtonData.ButtonType.UNDO));
             }
         };
     }
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         initializeData();
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
+
 
 
         CalculatorDisplay calculatorDisplay = new CalculatorDisplay(this);
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                             if (data.type == CalcButtonData.ButtonType.SOLVE) {
                                 // need to evaluate the expression
                                 double result = CalculatorProcessor.evaluate(calculatorDisplay.getExpression());
+                                expressions.add(calculatorDisplay.getExpression());
                                 String solution = "" + result;
                                 if (Double.isNaN(result)) {
                                     calculatorDisplay.setExpression("");
@@ -92,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
                             if (data.type == CalcButtonData.ButtonType.INPUT || data.type == CalcButtonData.ButtonType.OPERATOR){
                                 // this is input data and needs to be added to the string history
                                 calculatorDisplay.setExpression(calculatorDisplay.getText() + data.text);
+
+                            }
+                            if (data.type == CalcButtonData.ButtonType.UNDO) {
+                                if (expressions.isEmpty()) {
+                                    calculatorDisplay.setExpression("");
+                                } else {
+                                    String newExpression = expressions.pop();
+                                    calculatorDisplay.setExpression(newExpression);
+                                }
 
                             }
 

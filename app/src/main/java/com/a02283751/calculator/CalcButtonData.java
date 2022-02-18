@@ -16,7 +16,8 @@ public class CalcButtonData {
         SOLVE,
         CLEAR,
         DUMP,
-        OPERATOR
+        OPERATOR,
+        UNDO,
     }
 
     public CalcButtonData(String text, int row, int col, int colSpan, ButtonType type) {
