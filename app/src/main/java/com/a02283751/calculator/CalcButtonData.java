@@ -1,5 +1,9 @@
 package com.a02283751.calculator;
 
+import android.graphics.Color;
+
+import androidx.annotation.ColorInt;
+
 public class CalcButtonData {
     public String text;
     public int row;
@@ -11,7 +15,8 @@ public class CalcButtonData {
         INPUT,
         SOLVE,
         CLEAR,
-        DUMP
+        DUMP,
+        OPERATOR
     }
 
     public CalcButtonData(String text, int row, int col, int colSpan, ButtonType type) {
@@ -20,6 +25,8 @@ public class CalcButtonData {
         this.col = col;
         this.colSpan = colSpan;
         this.type = type;
+
+
     }
 
     public CalcButtonData(String text, int row, int col, int colSpan) {
@@ -28,6 +35,7 @@ public class CalcButtonData {
         this.col = col;
         this.colSpan = colSpan;
         this.type = ButtonType.INPUT;
+
     }
 
 }

@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="numberButtonBackground">#00cccc</color>
+    <color name="operatorButtonBackground">#006666</color>
+    <color name="equalButtonBackground">#999999</color>
 </resources>

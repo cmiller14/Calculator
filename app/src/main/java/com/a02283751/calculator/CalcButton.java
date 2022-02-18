@@ -1,6 +1,7 @@
 package com.a02283751.calculator;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.GridLayout;
 
 
@@ -15,6 +16,13 @@ public class CalcButton extends AppCompatButton {
         setLayoutParams(params);
         setText(calcButtonData.text);
         setOnClickListener(onClickListener);
+        if (calcButtonData.type == CalcButtonData.ButtonType.INPUT) {
+            setBackgroundColor(getResources().getColor(R.color.numberButtonBackground, null));
+        }else if (calcButtonData.type == CalcButtonData.ButtonType.SOLVE) {
+            setBackgroundColor(getResources().getColor(R.color.equalButtonBackground, null));
+        }else {
+            setBackgroundColor(getResources().getColor(R.color.operatorButtonBackground, null));
+        }
 
     }
 }
