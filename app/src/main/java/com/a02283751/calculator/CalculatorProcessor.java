@@ -7,8 +7,14 @@ public class CalculatorProcessor {
         if (expression.isEmpty()) {
             return Double.NaN;
         }
+        if (tokens[0].equals("")) {
+            return Double.NaN;
+        }
         if (tokens.length == 0) {
             // this is an error and needs to be handled
+            return Double.NaN;
+        }
+        if (Double.isNaN(Double.parseDouble(tokens[0]))) {
             return Double.NaN;
         }
         if (tokens.length == 1) {
@@ -19,6 +25,7 @@ public class CalculatorProcessor {
             // we also have an error
             return Double.NaN;
         }
+
 
         double currentValue = Double.parseDouble(tokens[0]);
         String operation = tokens[1];
